@@ -1,0 +1,33 @@
+name: Test
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+jobs:
+  test_linux:
+    name: Test / Linux
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions-rs/toolchain@v1  # Uses rust-toolchain file
+      - run: cargo test --verbose
+      - run: docker pull httpd:2.4
+  test_macos:
+    name: Test / MacOS
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions-rs/toolchain@v1  # Uses rust-toolchain file
+      - run: cargo test --verbose
+      #- run: docker pull httpd:2.4
+  test_windows:
+    name: Test / Windows
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions-rs/toolchain@v1  # Uses rust-toolchain file
+      - run: cargo test --verbose
+      #- run: docker pull httpd:2.4
